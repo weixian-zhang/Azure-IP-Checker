@@ -1,1 +1,1 @@
-# Azure-IP-Checker
+# Is Azure IP
