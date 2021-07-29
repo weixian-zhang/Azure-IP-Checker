@@ -1,0 +1,27 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Debug AzDcIpFileLoader",
+			"type": "func",
+			"command": "host start",
+			"problemMatcher": "$func-node-watch",
+			"isBackground": true,
+			"dependsOn": "Tsc Build AzDcIpFileLoader",
+			"options": {
+				"cwd": "${workspaceFolder}/Jobs\\AzDcIPFileFetcher"
+			},
+
+		},
+		{
+			"label": "Tsc Build AzDcIpFileLoader",
+			"type": "shell",
+			"command": "npm run build",
+			"dependsOn": "npm install (functions)",
+			"problemMatcher": "$tsc",
+			"options": {
+				"cwd": "${workspaceFolder}/Jobs\\AzDcIPFileFetcher"
+			}
+		},
+	]
+}
