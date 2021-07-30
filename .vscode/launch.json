@@ -5,7 +5,13 @@
             "type": "node",
             "request": "attach",
             "port": 9229,
-            "preLaunchTask": "Debug AzDcIpFileLoader"
+            "preLaunchTask": "Debug AzDcIpFileLoader",
+            "env": {
+                "env": "dev",
+                "AZURE_TENANT_ID": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+                "AZURE_CLIENT_ID":"3281b867-effa-40c8-aeae-b516dc788737",
+                "AZURE_CLIENT_SECRET": "72f988bf-86f1-41af-91ab-2d7cd011db47" //Tck22.Nw5KPcI-~KK0l5~zcRO2pf8B1Xh~"
+            }
         }
     ]
 }

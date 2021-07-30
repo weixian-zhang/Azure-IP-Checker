@@ -10,6 +10,7 @@ export class DcIP {
         this.Name = name;
         this.SystemService = systemService;
         this.Region = region;
+        this.IPPrefixes = [];
     }
 }
 
@@ -18,11 +19,21 @@ export class IPPrefix {
     IP: string
     Prefix: string
 
-    static SetIPPrefix(ipPrefix: string) {
-        if(this.IsIPv6(ipPrefix))
+    constructor(ipprefix: string) {
+        this.IPPrefix = ipprefix;
+        this.SetIPAndPrefix(ipprefix);
+    }
+
+    SetIPAndPrefix(ipPrefix: string) {
+        if(IPPrefix.IsIPv6(ipPrefix))
             return;
 
-        //ipAndPrefix ipPrefix.split('/');
+        const splitted = ipPrefix.split('/');
+        const ip = splitted[0];
+        const prefix = splitted[1];
+
+        this.IP = ip;
+        this.Prefix = prefix;
     }
 
     static IsIPv6(ipPrefix: string): boolean {
