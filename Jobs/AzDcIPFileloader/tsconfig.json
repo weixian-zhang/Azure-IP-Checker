@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "outDir": "dist",
+    "rootDirs": [
+      ".",
+      "../../Shared"
+    ],
+    "sourceMap": true,
+    "removeComments": true,
+    "strict": false,
+    "paths": {
+      "@shared/*": ["../../Shared/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "node_modules/*"
+  ],
+  "extends": "../../tsconfig",
+  "references": [
+    {
+        "path": "../../Shared"
+    }
+  ]
+}

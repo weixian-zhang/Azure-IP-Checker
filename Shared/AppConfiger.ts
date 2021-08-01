@@ -2,7 +2,8 @@ import {VisualStudioCodeCredential, DefaultAzureCredential, TokenCredential} fro
 import {AppConfigurationClient} from '@azure/app-configuration';
 
 const AppConfigUrl: string =  'https://appconfig-isazip.azconfig.io';
-const RedisConfigKey: string = 'redis-connstring';
+const RedisHostConfigKey: string = 'redis/hostname';
+const RedisAuthnKeyConfigKey: string = 'redis/key';
 const AzDcIPRangeFileConfigKey: string = 'file-azdatacenter-iprange';
 export class AppConfiger {
 
@@ -27,15 +28,18 @@ export class AppConfiger {
 
         try
         {
-            const redisSetting =
-            await this.client.getConfigurationSetting({key: RedisConfigKey, label: process.env.env});
+            const redisHostSetting =
+                await this.client.getConfigurationSetting({key: RedisHostConfigKey, label: process.env.env});
+
+            const redisKeySetting =
+                await this.client.getConfigurationSetting({key: RedisAuthnKeyConfigKey, label: process.env.env});
 
             const fileUrl = await this.client.getConfigurationSetting({key: AzDcIPRangeFileConfigKey});
 
-            return new AppConfig(redisSetting.value, fileUrl.value);
+            return new AppConfig(redisHostSetting.value, redisKeySetting.value, fileUrl.value);
         }
         catch(err) {
-            console.log(err);
+            throw err;
         }
     }
 
@@ -49,10 +53,12 @@ export class AppConfiger {
 
 export class AppConfig {
     AzDcIPFileUrl: string
-    RedisConnString: string
+    RedisHost: string
+    RedisKey: string
 
-    constructor(redisConn: string, dcipFileUrl: string) {
+    constructor(redishost: string, rediskey: string, dcipFileUrl: string) {
         this.AzDcIPFileUrl = dcipFileUrl;
-        this.RedisConnString = redisConn;
+        this.RedisHost = redishost;
+        this.RedisKey = rediskey;
     }
 }

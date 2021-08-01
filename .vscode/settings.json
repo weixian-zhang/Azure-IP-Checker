@@ -4,5 +4,17 @@
     "azureFunctions.projectLanguage": "TypeScript",
     "azureFunctions.projectRuntime": "~3",
     "debug.internalConsoleOptions": "neverOpen",
-    "azureFunctions.preDeployTask": "npm prune (functions)"
+    "azureFunctions.preDeployTask": "npm prune (functions)",
+    "redisXplorer.config": {
+        "profiles": [
+            {
+                "name": "IsAzureIP-Dev",
+                "host": "isazip-dev.redis.cache.windows.net",
+                "accessKey": "rvTrVAzzlIg43Z3pZdp7pjNr2mytcnlTtCyPRyyT4HM=",
+                "filter": "*",
+                "port": "6380"
+            }
+        ],
+        "scanLimit": 200
+    }
 }

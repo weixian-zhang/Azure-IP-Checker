@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+      "declaration": true,
+      "declarationMap": true,
+      "rootDir": ".",
+      "sourceMap": true,
+      "composite": true,
+      "outDir": "dist"
+    },
+    "extends": "../tsconfig",
+    "references": []
+  }

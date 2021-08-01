@@ -9,7 +9,7 @@
 			"isBackground": true,
 			"dependsOn": "Tsc Build AzDcIpFileLoader",
 			"options": {
-				"cwd": "${workspaceFolder}/Jobs\\AzDcIPFileFetcher"
+				"cwd": "${workspaceFolder}/Jobs\\AzDcIPFileLoader"
 			},
 
 		},
@@ -20,7 +20,7 @@
 			"dependsOn": "npm install (functions)",
 			"problemMatcher": "$tsc",
 			"options": {
-				"cwd": "${workspaceFolder}/Jobs\\AzDcIPFileFetcher"
+				"cwd": "${workspaceFolder}/Jobs\\AzDcIPFileLoader"
 			}
 		},
 	]

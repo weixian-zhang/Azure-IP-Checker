@@ -1,11 +1,11 @@
 {
   "bindings": [
     {
-      "name": "myTimer",
+      "name": "AzDcIpFileLoader",
       "type": "timerTrigger",
       "direction": "in",
       "schedule": "*/5 * * * * *"
     }
   ],
-  "scriptFile": "../dist/AzDcIPFileLoader/index.js"
+  "scriptFile": "../dist/Jobs/AzDcIPFileLoader/src/function.js"
 }
