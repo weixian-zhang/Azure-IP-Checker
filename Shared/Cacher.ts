@@ -1,5 +1,6 @@
 import * as redis from 'redis';
 import {DcIpPrefix} from './DcIP';
+import Utils from './Utils';
 
 export interface ICacher {
     Set: (key: string, val: string) => void
@@ -16,7 +17,14 @@ export class Redis implements ICacher {
     }
 
     public Set(key: string, val: string) {
-        this.client.hmset(key, val);
+        if(Utils.IsNuuD(key)) {
+            //TODO log
+            return;
+        }
+        this.client.hset('', key, val, (err, resp) => {
+            if(err) throw err;
+            console.log(resp);
+        });
     }
 
     public SearchKey(pattern: string): DcIpPrefix[] {

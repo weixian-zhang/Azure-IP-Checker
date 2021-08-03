@@ -5,7 +5,8 @@
       "rootDir": ".",
       "sourceMap": true,
       "composite": true,
-      "outDir": "dist"
+      "outDir": "dist",
+      "allowJs": true
     },
     "extends": "../tsconfig",
     "references": []
