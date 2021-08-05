@@ -1,6 +1,7 @@
 import { AzureFunction, Context } from "@azure/functions"
 import * as _ from 'lodash';
 import {DcIpCacheDataOrganizer} from '../../../Shared/DcIP';
+import {Logness} from '../../../Shared/Logness';
 import {ICacher, Redis} from '../../../Shared/Cacher';
 import {AppConfiger, AppConfig} from '../../../Shared/AppConfiger';
 import {FileStorager} from './FileStorager';
@@ -21,6 +22,9 @@ const timerTrigger: AzureFunction = async function (context: Context, myTimer: a
     try
     {
         const appconfig: AppConfig = await GetAppConfig();
+
+        Logness.Ready(appconfig).Info('AzFunc started...');
+        Logness.Ready(appconfig).Error(new Error('Test Error...'));
 
         const fileDownloader = new HttpFile();
 

@@ -1,6 +1,7 @@
 import {BlobServiceClient, ContainerClient} from '@azure/storage-blob'
 import { resolve } from 'path/posix';
 import {AppConfig, AppConfiger} from '../../../Shared/AppConfiger'
+import {DefaultAzureCredential} from '@azure/identity';
 
 export class FileStorager {
 
@@ -24,11 +25,13 @@ export class FileStorager {
 
         const url = `https://${this.appConfig.StorageName}.blob.core.windows.net`;
 
-        this.blobClient = new BlobServiceClient(url, this.configer.GetAzCred());
+        const cred = this.configer.GetAzCred();
+
+        this.blobClient = new BlobServiceClient(url, cred);
 
         const container =  this.blobClient.getContainerClient(this.containerName);
 
-        const blobName = `ServiceTag_Public_${(new Date).toISOString().slice(0,10).replace(/-/g,"")}`
+        const blobName = `ServiceTag_Public_${(new Date).toISOString().slice(0,10).replace(/-/g,"")}.json`
 
         const blobClient =  container.getBlockBlobClient(blobName);
 
