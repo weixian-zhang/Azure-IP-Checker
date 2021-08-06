@@ -25,7 +25,7 @@ const timerTrigger: AzureFunction = async function (context: Context, myTimer: a
     {
         const appconfig: AppConfig = await GetAppConfig();
 
-        this.logness = Logness.Ready(appconfig, context);
+        this.logness = Logness.Ready(appconfig);
 
         const fileDownloader = new HttpFile(this.logness);
 

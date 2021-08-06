@@ -78,10 +78,10 @@ export class AppConfiger {
     }
 
     static IsDev(): boolean {
-        if(process.env.env != undefined && process.env.env == 'dev')
-            return true;
-        else
+        if(process.env.env && process.env.env == 'prod')
             return false;
+
+        return true;
     }
 }
 

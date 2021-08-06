@@ -18,7 +18,11 @@
             "cwd": "${workspaceFolder}/Api",
             "runtimeExecutable": "npm",
             "runtimeArgs": ["run", "debug"],
-            "outputCapture": "std"
+            "outputCapture": "std",
+            "env": {
+                "env": "dev",
+                "port": 3000
+            },
           }
     ]
 }

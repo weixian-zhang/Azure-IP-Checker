@@ -20,7 +20,7 @@ export default class HttpServer {
         const configer = new AppConfiger();
         this.appconfig = await configer.GetAppConfig();
 
-        this.logness = Logness.Ready(this.appconfig, null);
+        this.logness = Logness.Ready(this.appconfig);
 
         resolve(this);
       } catch (err) {
@@ -38,7 +38,7 @@ export default class HttpServer {
 
       if (!queryStr)
         res.send(
-          "Querystring `ips` is empty. `ips` can be single-IP, multiple single-IP or IP Cidr. Example: `20.43.24.5,23.10.111.12/27`"
+          "Querystring `ips` is not supplied. `ips` can be single-IP, multiple single-IPs or IP Cidr combination. Example: `20.43.24.5,23.10.111.12/27`"
         );
 
       res.send("Hello World!");
