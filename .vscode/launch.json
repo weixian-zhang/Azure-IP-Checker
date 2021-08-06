@@ -9,6 +9,16 @@
             "env": {
                 "env": "dev"
             }
+        },
+        {
+            "name": "Debug Api",
+            "type": "node",
+            "request": "attach",
+            "port": 9229,
+            "preLaunchTask": "Tsc Build Api",
+            "env": {
+                "env": "dev"
+            }
         }
     ]
 }

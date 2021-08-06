@@ -15,6 +15,8 @@ declare module globalThis {
 
 const timerTrigger: AzureFunction = async function (context: Context, myTimer: any): Promise<void> {
 
+    logness: Logness;
+
     if (!globalThis.fetch) {
         globalThis.fetch = fetch;
     }
@@ -23,33 +25,39 @@ const timerTrigger: AzureFunction = async function (context: Context, myTimer: a
     {
         const appconfig: AppConfig = await GetAppConfig();
 
-        Logness.Ready(appconfig).Info('AzFunc started...');
-        Logness.Ready(appconfig).Error(new Error('Test Error...'));
+        this.logness = Logness.Ready(appconfig);
 
-        const fileDownloader = new HttpFile();
+        const fileDownloader = new HttpFile(this.logness);
 
         const cacher: ICacher = new Redis(appconfig.RedisHost, appconfig.RedisKey);
+
+        this.logness.Info(`Job-AzDcIpFileLoader started, downloading file from ${appconfig.AzDcIPFileUrl}`)
 
         const resp = await fetch(appconfig.AzDcIPFileUrl);
         const jObj = await resp.json();
 
-        // const orgDcIp = DcIpCacheDataOrganizer.GroupByCacheKey(jObj);
+        this.logness.Info('Download file complete, sorting data for caching');
 
-        // _.each(orgDcIp, (dcip) => {
-        //     cacher.Set(dcip.CacheKey, JSON.stringify(dcip.DcIpPrefixes));
-        // })
+        const orgDcIp = DcIpCacheDataOrganizer.GroupByCacheKey(jObj);
+
+        this.logness.Info('Sorting data done, updating cache');
+
+        _.each(orgDcIp, (dcip) => {
+            cacher.Set(dcip.CacheKey, JSON.stringify(dcip.DcIpPrefixes));
+        })
+
+        this.logness.Info('Updating cache done, saving file json content to Blob Storage');
 
         //TODO: save to storage
-        const storager = new FileStorager();
+        const storager = new FileStorager(this.logness);
         storager.Ready.then(async () => {
-                await storager.UploadFile(JSON.stringify(jObj));
+            await storager.UploadFile(JSON.stringify(jObj));
         });
 
-
+        this.logness.Info('File content saved to Blob Storage, job completed');
     }
     catch(err) {
-        //TODO: log error
-        console.log(err);
+        this.logness.Error(err);
     }
 };
 

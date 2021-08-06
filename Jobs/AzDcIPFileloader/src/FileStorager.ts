@@ -2,22 +2,26 @@ import {BlobServiceClient, ContainerClient} from '@azure/storage-blob'
 import { resolve } from 'path/posix';
 import {AppConfig, AppConfiger} from '../../../Shared/AppConfiger'
 import {DefaultAzureCredential} from '@azure/identity';
+import {Logness} from '../../../Shared/Logness';
 
 export class FileStorager {
 
     public Ready: Promise<any>;
 
+    logness: Logness;
     appConfig: AppConfig;
     blobClient: BlobServiceClient;
     containerName = 'azure-dc-ip-files';
     configer: AppConfiger;
 
-    constructor() {
+    constructor(logness: Logness) {
         this.Ready = new Promise(async (resolve, reject) => {
             this.configer = new AppConfiger();
             this.appConfig = await this.configer.GetAppConfig();
             resolve(undefined);
         });
+
+        this.logness = logness;
     }
 
 
@@ -41,8 +45,7 @@ export class FileStorager {
                 resolve(undefined);
             }
             catch(err) {
-                //TODO log
-                reject(err);
+                this.logness.Error(err);
             }
 
         })

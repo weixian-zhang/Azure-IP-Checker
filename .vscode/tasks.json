@@ -2,6 +2,14 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
+			"label": "npm prune (functions)",
+			"type": "shell",
+			"command": "npm prune --production",
+			"options": {
+				"cwd": "${workspaceFolder}/Jobs\\AzDcIPFileLoader"
+			}
+		},
+		{
 			"label": "Debug AzDcIpFileLoader",
 			"type": "func",
 			"command": "host start",
@@ -21,6 +29,15 @@
 			"problemMatcher": "$tsc",
 			"options": {
 				"cwd": "${workspaceFolder}/Jobs\\AzDcIPFileLoader"
+			}
+		},
+		{
+			"label": "Tsc Build Api",
+			"type": "shell",
+			"command": "npm run build",
+			"problemMatcher": "$tsc",
+			"options": {
+				"cwd": "${workspaceFolder}/Api"
 			}
 		},
 	]

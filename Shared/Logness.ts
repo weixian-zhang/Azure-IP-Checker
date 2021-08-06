@@ -55,12 +55,12 @@ export class Logness {
         return Logness.Instance;
     }
 
-    Info(msg: string): Logness {
+    Info(msg: string) {
         Logness.Instance.logger.info(msg);
         return this;
     }
 
-    Error(err: Error): Logness {
+    Error(err: Error) {
         Logness.Instance.logger.error(err.message);
         return this;
     }
