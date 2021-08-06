@@ -25,11 +25,13 @@ const timerTrigger: AzureFunction = async function (context: Context, myTimer: a
     {
         const appconfig: AppConfig = await GetAppConfig();
 
-        this.logness = Logness.Ready(appconfig);
+        this.logness = Logness.Ready(appconfig, context);
 
         const fileDownloader = new HttpFile(this.logness);
 
-        const cacher: ICacher = new Redis(appconfig.RedisHost, appconfig.RedisKey);
+        const cacher: ICacher = new Redis(appconfig.RedisHost, appconfig.RedisKey, this.logness);
+
+        this.logness.Info(`Job-AzDcIpFileLoader initialize app configuration complete`)
 
         this.logness.Info(`Job-AzDcIpFileLoader started, downloading file from ${appconfig.AzDcIPFileUrl}`)
 
@@ -57,7 +59,10 @@ const timerTrigger: AzureFunction = async function (context: Context, myTimer: a
         this.logness.Info('File content saved to Blob Storage, job completed');
     }
     catch(err) {
-        this.logness.Error(err);
+        if(!err) {
+            console.log(err);
+            this.logness.Error(err);
+        }
     }
 };
 

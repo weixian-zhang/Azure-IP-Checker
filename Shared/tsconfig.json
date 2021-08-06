@@ -6,7 +6,9 @@
       "sourceMap": true,
       "composite": true,
       "outDir": "dist",
-      "allowJs": true
+      "allowJs": true,
+      "strict": true,
+      "noImplicitAny": false
     },
     "extends": "../tsconfig",
     "references": []

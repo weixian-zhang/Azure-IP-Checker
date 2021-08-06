@@ -1,6 +1,7 @@
 import * as redis from 'redis';
 import {DcIpPrefix} from './DcIP';
 import Utils from './Utils';
+import {Logness} from './Logness';
 
 export interface ICacher {
     Set: (key: string, val: string) => void
@@ -9,11 +10,14 @@ export interface ICacher {
 
 export class Redis implements ICacher {
 
-    private client: redis.RedisClient;
+    client: redis.RedisClient;
+    logness: Logness = {} as Logness;
 
-    constructor(host: string, authKey: string) {
+    constructor(host: string, authKey: string, logness: Logness) {
 
         this.client = redis.createClient(6380, host, {auth_pass: authKey, tls: {servername: host}});
+
+        this.logness = logness;
     }
 
     public Set(key: string, val: string) {
@@ -22,8 +26,10 @@ export class Redis implements ICacher {
             return;
         }
         this.client.hset('', key, val, (err, resp) => {
-            if(err) throw err;
-            console.log(resp);
+            if(!err) {
+                console.log(err);
+                this.logness.Error(err);
+            }
         });
     }
 

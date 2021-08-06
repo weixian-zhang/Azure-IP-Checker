@@ -8,13 +8,13 @@
     ],
     "target": "es2015",
     "outDir": "./dist",
+    "sourceMap": true,
     "removeComments": true,
-    "inlineSourceMap": true,
-    "inlineSources": true,
     "preserveConstEnums": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "strict": true,
+    "noImplicitAny": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
@@ -31,7 +31,6 @@
     "node_modules",
     "**/*-spec.ts"
   ],
-  "extends": "../tsconfig",
   "references": [
     {
         "path": "../Shared"

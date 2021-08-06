@@ -22,6 +22,7 @@ export default class Eventer {
             try
             {
                 await this.producer.sendBatch(batchMsg);
+                resolve(this);
             }
             catch(err) {
                 reject(err);

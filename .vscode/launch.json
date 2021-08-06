@@ -8,17 +8,17 @@
             "preLaunchTask": "Debug AzDcIpFileLoader",
             "env": {
                 "env": "dev"
-            }
+            },
+            "outputCapture": "std"
         },
         {
             "name": "Debug Api",
             "type": "node",
-            "request": "attach",
-            "port": 9229,
-            "preLaunchTask": "Tsc Build Api",
-            "env": {
-                "env": "dev"
-            }
-        }
+            "request": "launch",
+            "cwd": "${workspaceFolder}/Api",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "debug"],
+            "outputCapture": "std"
+          }
     ]
 }

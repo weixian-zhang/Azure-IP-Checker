@@ -65,11 +65,11 @@ export class AppConfiger {
             const ehConnStr =
                 await this.client.getConfigurationSetting({key: EventHubConnStringConfigKey, label: process.env.env});
 
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 resolve(new AppConfig
-                    (redisHostSetting.value, redisKeySetting.value, fileUrl.value, strgNameSetting.value,
-                        ehnameTraceJobAzDcIpLoader.value, ehnameErrorJobAzDcIpLoader.value,
-                        ehnameTraceApi.value, ehnameErrorApi.value, ehConnStr.value))
+                    (redisHostSetting.value!, redisKeySetting.value!, fileUrl.value!, strgNameSetting.value!,
+                        ehnameTraceJobAzDcIpLoader.value!, ehnameErrorJobAzDcIpLoader.value!,
+                        ehnameTraceApi.value!, ehnameErrorApi.value!, ehConnStr.value!))
             })
         }
         catch(err) {

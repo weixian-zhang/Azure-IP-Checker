@@ -5,6 +5,7 @@
 			"label": "npm prune (functions)",
 			"type": "shell",
 			"command": "npm prune --production",
+			"dependsOn": "Tsc Build AzDcIpFileLoader",
 			"options": {
 				"cwd": "${workspaceFolder}/Jobs\\AzDcIPFileLoader"
 			}
