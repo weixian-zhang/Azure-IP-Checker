@@ -16,5 +16,6 @@
             }
         ],
         "scanLimit": 200
-    }
+    },
+    "azureFunctions.projectSubpath": "Jobs\\AzDcIPFileloader"
 }

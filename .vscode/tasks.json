@@ -11,18 +11,6 @@
 			}
 		},
 		{
-			"label": "Debug AzDcIpFileLoader",
-			"type": "func",
-			"command": "host start",
-			"problemMatcher": "$func-node-watch",
-			"isBackground": true,
-			"dependsOn": "Tsc Build AzDcIpFileLoader",
-			"options": {
-				"cwd": "${workspaceFolder}/Jobs\\AzDcIPFileLoader"
-			},
-
-		},
-		{
 			"label": "Tsc Build AzDcIpFileLoader",
 			"type": "shell",
 			"command": "npm run build",

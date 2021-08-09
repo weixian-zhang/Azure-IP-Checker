@@ -18,7 +18,7 @@
     "format": "prettier --write \"{src,test}/**/*.ts\"",
     "lint": "tslint --force --format verbose \"src/**/*.ts\"",
     "prepublishOnly": "npm run build",
-    "build": "npm run format && npm run clean && npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
+    "build": "npm run format && npm run clean  && echo Using TypeScript && tsc --version && tsc --pretty",
     "test": "npm run build && mocha --compilers ts:ts-node/register --recursive \"test/**/*-spec.ts\"",
     "coverage": "nyc --include=\"src/**/*.ts\" --reporter=text --reporter=html --reporter=lcov mocha --compilers ts:ts-node/register --recursive \"test/**/*-spec.ts\"",
     "watch": "npm run build -- --watch",
@@ -72,7 +72,6 @@
     "node-fetch": "^2.6.1",
     "redis": "^3.1.2",
     "structured-logging": "^4.0.1",
-    "winston": "^3.3.3",
-    "ipaddr.js": "^1.7.0"
+    "winston": "^3.3.3"
   }
 }

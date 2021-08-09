@@ -2,10 +2,11 @@ import * as redis from 'redis';
 import {DcIpPrefix} from './DcIP';
 import Utils from './Utils';
 import {Logness} from './Logness';
+import * as _ from 'lodash';
 
 export interface ICacher {
     Set: (key: string, val: string) => void
-    SearchKey: (pattern: string) => DcIpPrefix[]
+    Search: (pattern: string) => Promise<DcIpPrefix[]>
 }
 
 export class Redis implements ICacher {
@@ -25,26 +26,43 @@ export class Redis implements ICacher {
             //TODO log
             return;
         }
-        this.client.hset('', key, val, (err, resp) => {
-            if(!err) {
+        this.client.set(key, val, (err) => {
+            if(err) {
                 console.log(err);
                 this.logness.Error(err);
             }
         });
     }
 
-    public SearchKey(pattern: string): DcIpPrefix[] {
+    public Search(pattern: string): Promise<DcIpPrefix[]> {
 
         const dcips: DcIpPrefix[] = [];
 
-        this.client.keys(pattern, (err, keys) => {
-            keys.forEach((key) => {
-                this.client.HGETALL(key, (err, obj) => {
+        return new Promise(async (resolve, reject) => {
 
-                })
-            })
+            await this.client.keys(pattern, (err, keys) => {
+                if(err) {
+                    this.logness.Error(err);
+                    return reject(dcips);
+                }
+
+                if(keys.length == 0) {
+                    return resolve(dcips);
+                }
+
+                for(let key of keys) {
+                    this.client.get(key, (err, value) => {
+                        if(err) {
+                            this.logness.Error(err);
+                            return [];
+                        }
+
+                        const dcips = JSON.parse(value!);
+
+                        return resolve(dcips);
+                    })
+                }
+            });
         });
-
-        return dcips;
     }
 }

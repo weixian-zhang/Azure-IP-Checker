@@ -1,15 +1,19 @@
 {
     "configurations": [
         {
-            "name": "Debug DcIPFileLoader",
+            "name": "Debug Job DcIPFileLoader",
             "type": "node",
-            "request": "attach",
+            "request": "launch",
             "port": 9229,
-            "preLaunchTask": "Debug AzDcIpFileLoader",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "start"],
+            "preLaunchTask": "Tsc Build AzDcIpFileLoader",
+            "cwd": "${workspaceFolder}/Jobs/AzDcIPFileLoader",
+            "outputCapture": "std",
             "env": {
-                "env": "dev"
+                "env": "dev",
+                "localdebug": "true"
             },
-            "outputCapture": "std"
         },
         {
             "name": "Debug Api",
@@ -19,9 +23,11 @@
             "runtimeExecutable": "npm",
             "runtimeArgs": ["run", "debug"],
             "outputCapture": "std",
+            "preLaunchTask": "Tsc Build Api",
             "env": {
                 "env": "dev",
-                "port": 3000
+                "localdebug": "true",
+                "port": "3000"
             },
           }
     ]

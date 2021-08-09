@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 
 export default class Utils {
 
@@ -15,5 +16,19 @@ export default class Utils {
             return true;
         else
             return false;
+    }
+
+    static GetFirst3PartOfIP(ip: string): string {
+        if(!ip)
+            return '';
+
+        const splitDot = ip.split('.');
+        const first3PartOfIP = _.initial(splitDot).join('.'); //get first 3 part of ip address for searching
+
+        if(!first3PartOfIP) {
+            console.log(`key is null ${first3PartOfIP}`);
+        }
+
+        return first3PartOfIP
     }
 }

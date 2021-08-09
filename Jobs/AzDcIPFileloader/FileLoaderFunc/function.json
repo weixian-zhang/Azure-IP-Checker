@@ -4,8 +4,8 @@
       "name": "AzDcIpFileLoader",
       "type": "timerTrigger",
       "direction": "in",
-      "schedule": "0 0 23 * * *"
+      "schedule": "0 0 */24 * * *"
     }
   ],
-  "scriptFile": "../dist/Jobs/AzDcIPFileLoader/src/function.js"
+  "scriptFile": "../dist/Jobs/AzDcIPFileLoader/FileLoaderFunc/Function.js"
 }

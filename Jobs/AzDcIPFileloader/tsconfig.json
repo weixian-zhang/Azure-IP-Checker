@@ -2,7 +2,7 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es6",
-    "outDir": "dist",
+    "outDir": "./dist",
     "rootDirs": [
       ".",
       "../../Shared"
@@ -16,9 +16,10 @@
       "@shared/*": ["../../Shared/*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["FileLoaderFunc/**/*"],
   "exclude": [
-    "node_modules/*"
+    "node_modules/*",
+    "./FileLoaderFunc/dist/**/*"
   ],
   "extends": "../../tsconfig",
   "references": [

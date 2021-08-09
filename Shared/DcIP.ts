@@ -1,16 +1,15 @@
 import Utils from './Utils';
 import * as _ from 'lodash';
-import * as ipaddr from 'ipaddr.js';
 
 export class DcIpPrefix {
-    IPPrefix: string
-    IP: string
-    Prefix: string
-    Id: string
-    Name: string
-    SystemService: string
-    Region: string
-    SearchKey: string
+    IPPrefix: string = '';
+    IP: string = '';
+    Prefix: string = '';
+    Id: string = '';
+    Name: string = '';
+    SystemService: string = '';
+    Region: string = '';
+    SearchKey: string = '';
 
     SetIPAndPrefix(ipPrefix: string) {
 
@@ -25,21 +24,7 @@ export class DcIpPrefix {
         this.IP = ip;
         this.Prefix = prefix;
 
-        this.SearchKey = this.GetFirst3PartOfIP();
-    }
-
-    GetFirst3PartOfIP(): string {
-        if(!this.IP)
-            return '';
-
-        const splitDot = this.IP.split('.');
-        const first3PartOfIP =_.initial(splitDot).join('.'); //get first 3 part of ip address for searching
-
-        if(Utils.IsNuuD(first3PartOfIP)) {
-            console.log(`key is null ${first3PartOfIP}`);
-        }
-
-        return first3PartOfIP
+        this.SearchKey = Utils.GetFirst3PartOfIP(this.IP);
     }
 }
 
