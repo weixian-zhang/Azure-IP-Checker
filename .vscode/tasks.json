@@ -29,5 +29,46 @@
 				"cwd": "${workspaceFolder}/Api"
 			}
 		},
+		{
+			"type": "docker-build",
+			"label": "docker-build",
+			"platform": "node",
+			"dockerBuild": {
+				"dockerfile": "${workspaceFolder}/Api/Dockerfile",
+				"context": "${workspaceFolder}/Api",
+				"pull": true
+			},
+			"node": {
+				"package": "${workspaceFolder}/Api/package.json"
+			}
+		},
+		{
+			"type": "docker-run",
+			"label": "docker-run: release",
+			"dependsOn": [
+				"docker-build"
+			],
+			"platform": "node",
+			"node": {
+				"package": "${workspaceFolder}/Api/package.json"
+			}
+		},
+		{
+			"type": "docker-run",
+			"label": "docker-run: debug",
+			"dependsOn": [
+				"docker-build"
+			],
+			"dockerRun": {
+				"env": {
+					"DEBUG": "*",
+					"NODE_ENV": "development"
+				}
+			},
+			"node": {
+				"package": "${workspaceFolder}/Api/package.json",
+				"enableDebugging": true
+			}
+		}
 	]
 }

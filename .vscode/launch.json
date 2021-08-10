@@ -6,14 +6,17 @@
             "request": "launch",
             "port": 9229,
             "runtimeExecutable": "npm",
-            "runtimeArgs": ["run", "start"],
+            "runtimeArgs": [
+                "run",
+                "start"
+            ],
             "preLaunchTask": "Tsc Build AzDcIpFileLoader",
             "cwd": "${workspaceFolder}/Jobs/AzDcIPFileLoader",
             "outputCapture": "std",
             "env": {
                 "env": "dev",
                 "localdebug": "true"
-            },
+            }
         },
         {
             "name": "Debug Api",
@@ -21,14 +24,28 @@
             "request": "launch",
             "cwd": "${workspaceFolder}/Api",
             "runtimeExecutable": "npm",
-            "runtimeArgs": ["run", "debug"],
+            "runtimeArgs": [
+                "run",
+                "debug"
+            ],
             "outputCapture": "std",
             "preLaunchTask": "Tsc Build Api",
             "env": {
                 "env": "dev",
                 "localdebug": "true",
                 "port": "3000"
-            },
-          }
+            }
+        },
+        {
+            "name": "Docker Node.js Launch",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "platform": "node",
+            "node": {
+                "package": "${workspaceFolder}/Api/package.json",
+                "localRoot": "${workspaceFolder}/Api"
+            }
+        }
     ]
 }

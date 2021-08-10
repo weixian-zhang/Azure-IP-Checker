@@ -18,17 +18,17 @@ export default class Utils {
             return false;
     }
 
-    static GetFirst3PartOfIP(ip: string): string {
+    static GetFirst2PartOfIP(ip: string): string {
         if(!ip)
             return '';
 
         const splitDot = ip.split('.');
-        const first3PartOfIP = _.initial(splitDot).join('.'); //get first 3 part of ip address for searching
+        const first2PartOfIP = splitDot.slice(0, 2).join('.'); //get first 3 part of ip address for searching
 
-        if(!first3PartOfIP) {
-            console.log(`key is null ${first3PartOfIP}`);
+        if(!first2PartOfIP) {
+            console.log(`key is null ${first2PartOfIP}`);
         }
 
-        return first3PartOfIP
+        return first2PartOfIP
     }
 }

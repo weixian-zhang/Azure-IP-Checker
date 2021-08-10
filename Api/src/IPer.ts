@@ -69,8 +69,8 @@ export default class IPer {
       }
 
       try {
-        const first3Part: string = Utils.GetFirst3PartOfIP(ip);
-        const searchPattern = first3Part + "*";
+        const first2Part: string = Utils.GetFirst2PartOfIP(ip);
+        const searchPattern = first2Part + "*";
 
         this.cacher.Search(searchPattern).then((dcips: DcIpPrefix[]) => {
           if (dcips.length == 0) {
@@ -101,11 +101,10 @@ export default class IPer {
             const ipprefix = ipaddr.IPv4.parseCIDR(dcip.IPPrefix);
             const isazip = ipadr.match(ipprefix);
 
-            if (!isazip) {
-              return resolve(new IPCheckResult(false, ip, "", "", "", false));
-              break;
-            } else {
-              resolve(
+            if (!isazip) continue;
+
+            if (isazip) {
+              return resolve(
                 new IPCheckResult(
                   true,
                   ip,
@@ -115,9 +114,9 @@ export default class IPer {
                   true
                 )
               );
-              break;
             }
           }
+          return resolve(new IPCheckResult(false, ip, "", "", "", false));
         });
       } catch (err) {
         this.logness.Error(err);

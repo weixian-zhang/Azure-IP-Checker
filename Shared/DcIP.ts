@@ -11,7 +11,7 @@ export class DcIpPrefix {
     Region: string = '';
     SearchKey: string = '';
 
-    SetIPAndPrefix(ipPrefix: string) {
+    SetIPPrefixAndSearchKey(ipPrefix: string) {
 
         if(Utils.IsIPv6(ipPrefix))
             return;
@@ -24,7 +24,7 @@ export class DcIpPrefix {
         this.IP = ip;
         this.Prefix = prefix;
 
-        this.SearchKey = Utils.GetFirst3PartOfIP(this.IP);
+        this.SearchKey = Utils.GetFirst2PartOfIP(this.IP);
     }
 }
 
@@ -63,7 +63,7 @@ export class DcIpCacheDataOrganizer {
             _.each(ipVal.properties.addressPrefixes, (ipprefix) => {
 
                 const dcIpPrefix = new DcIpPrefix();
-                dcIpPrefix.SetIPAndPrefix(ipprefix);
+                dcIpPrefix.SetIPPrefixAndSearchKey(ipprefix);
                 dcIpPrefix.Id = ipVal.id;
                 dcIpPrefix.Name = ipVal.name;
                 if(ipVal.properties.region == '')
