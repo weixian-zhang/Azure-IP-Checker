@@ -19,12 +19,20 @@ export default class HttpServer {
   public Ready(): Promise<HttpServer> {
     return new Promise(async (resolve, reject) => {
       try {
+        console.log(
+          "Initializing app config from Azure Application Configuration service"
+        );
+
         const configer = new AppConfiger();
         this.appconfig = await configer.GetAppConfig();
+
+        console.log("app config initialized");
 
         this.logness = Logness.Ready(this.appconfig);
 
         this.iper = new IPer(this.appconfig, this.logness);
+
+        console.log("http server in Ready state");
 
         return resolve(this);
       } catch (err) {
@@ -57,6 +65,7 @@ export default class HttpServer {
     });
 
     this.app.listen(this.port, () => {
+      console.log(`Api started and listening on port: ${this.port}`);
       this.logness.Info(`Api started and listening on port: ${this.port}`);
     });
   }

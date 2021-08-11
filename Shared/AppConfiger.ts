@@ -73,6 +73,7 @@ export class AppConfiger {
             })
         }
         catch(err) {
+            console.log(`GetAppConfig throw error ${err}`);
             throw err;
         }
     }
